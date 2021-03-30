@@ -31,23 +31,6 @@ class AntColonySystem:
         self.rho = rho
         self.tau_0 = tau_0
 
-    def distance(self, city_1, city_2):
-        """Calculate distance between two cities based on their id numbers."""
-        x_1 = self.x[city_1 - 1]
-        x_2 = self.x[city_2 - 1]
-        y_1 = self.y[city_1 - 1]
-        y_2 = self.y[city_2 - 1]
-        return math.sqrt(pow(x_1 - x_2, 2) + pow(y_1 - y_2, 2))
-
-    def draw_path(self, city_1, city_2, line_color, pheromone):
-        """Draw a line between cities, thickness based on pheromone amount."""
-        x_1 = self.x[city_1 - 1]
-        x_2 = self.x[city_2 - 1]
-        y_1 = self.y[city_1 - 1]
-        y_2 = self.y[city_2 - 1]
-        self.ax.plot([x_1, x_2], [y_1, y_2],
-                     color=line_color, linewidth=(10*pheromone**2+0.1))
-
     def open_map(self, map_id):
         """Use the provided data file to import the coordinates of cities."""
         self.map_id = map_id
@@ -168,6 +151,23 @@ class AntColonySystem:
             self.draw_path(shortest_path[city],
                            shortest_path[(city+1) % self.N],
                            'seagreen', 0.6)
+
+    def distance(self, city_1, city_2):
+        """Calculate distance between two cities based on their id numbers."""
+        x_1 = self.x[city_1 - 1]
+        x_2 = self.x[city_2 - 1]
+        y_1 = self.y[city_1 - 1]
+        y_2 = self.y[city_2 - 1]
+        return math.sqrt(pow(x_1 - x_2, 2) + pow(y_1 - y_2, 2))
+
+    def draw_path(self, city_1, city_2, line_color, pheromone):
+        """Draw a line between cities, thickness based on pheromone amount."""
+        x_1 = self.x[city_1 - 1]
+        x_2 = self.x[city_2 - 1]
+        y_1 = self.y[city_1 - 1]
+        y_2 = self.y[city_2 - 1]
+        self.ax.plot([x_1, x_2], [y_1, y_2],
+                     color=line_color, linewidth=(10*pheromone**2+0.1))
 
 
 if __name__ == "__main__":
